@@ -119,3 +119,24 @@ mysql> SHOW VARIABLES LIKE 'character_set_server';
 
 
 TRUNCATE TABLE 
+
+
+原来字符编码问题是powershell的特色，换成cmd就没问题了。
+
+
+换成mysql 8.0从文件导入数据出问题：
+mysql> LOAD DATA LOCAL INFILE 'D:/VSCODE/DatabaseSystemLab/Lab1/dbms_lab/project.txt' INTO TABLE project;
+ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.
+参考：https://stackoverflow.com/questions/63361962/error-2068-hy000-load-data-local-infile-file-request-rejected-due-to-restrict
+
+[client]
+loose-local-infile=1
+[mysqld]
+local_infile=1
+
+但是还报错：
+mysql> LOAD DATA LOCAL INFILE 'D:/VSCODE/DatabaseSystemLab/Lab1/dbms_lab/project.txt' INTO TABLE project;     
+ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.
+去掉LOCAL就好了
+mysql> LOAD DATA INFILE 'D:/VSCODE/DatabaseSystemLab/Lab1/dbms_lab/project.txt' INTO TABLE project;
+ERROR 1062 (23000): Duplicate entry 'P1' for key 'project.PRIMARY'

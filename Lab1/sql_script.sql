@@ -1,4 +1,4 @@
-USE company;
+-- USE company;
 -- 1：参加了项目名为“SQL Project”的员工名字；
 SELECT ENAME
 FROM EMPLOYEE e,

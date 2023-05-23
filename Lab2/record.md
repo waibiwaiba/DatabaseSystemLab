@@ -12,3 +12,53 @@
 属性值：true
 单击“确定”保存更改。
 现在，你可以重新连接MySQL 8.0数据库，并且不应该再收到“Public Key Retrieval is not allowed”错误了。
+
+
+
+### 实体
+
+主键粗体，外键斜体
+
+course(**course_num**, course_name, **teacher_num**)
+
+- 课程-老师：n-1
+- course_num->course_name
+
+student(**student_num**, student_name, *class_num*, age, gender)
+
+- 学生-班级：n-1
+- student_num-> student_name, class_num, age, gender
+
+score(**course_num**, **student_num**, grade)
+
+- 课程-学生：m-n
+- {course_num, student_num}->grade
+
+teacher(**teacher_num**, teacher_name, *department_num*)
+
+- 老师-系：n-1
+- teacher_num->teacher_name, department_num
+
+class(**class_num**, *department_num*)
+
+- 班级-系：n-1
+- class_num->department_num
+
+dormitory(**dormitory_num**, *college_num*)
+
+- 公寓-学院：n-1
+- dormitory_num->college_num
+
+laboratory(**laboratory_num**, laboratory_name, *college_num*)
+
+- 实验室-学院：1-1
+- laboratory_num->laboratory_name, college_num
+
+college(**college_num**, college_name)
+
+- college_num->college_name
+
+department(**department_num**, department_name, *college_num*)
+
+- 系-学院：n-1
+- department_num->department_name, college_num
